@@ -6,12 +6,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Сотрудники - Панель управления автосервисом</title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/crud_styles.css' %}">
 </head>
 <body>
     <div class="container">
         <h1>Список сотрудников</h1>
         <a href="{% url 'dashboard:add_employee' %}">Добавить сотрудника</a>
+    
         <table>
             <thead>
                 <tr>
