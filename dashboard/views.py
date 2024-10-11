@@ -78,3 +78,123 @@ def delete_customer_view(request, customer_id):
         customer.delete()
         return redirect('dashboard:customer_list')
     return render(request, 'dashboard/delete_customer.html', {'customer': customer})
+
+@login_required(login_url='dashboard:login')
+@user_passes_test(is_admin, login_url='dashboard:login')
+def vehicle_list_view(request):
+    vehicles = Vehicle.objects.select_related('customer').all()
+    return render(request, 'dashboard/vehicle_list.html', {'vehicles': vehicles})
+
+@login_required(login_url='dashboard:login')
+@user_passes_test(is_admin, login_url='dashboard:login')
+def add_vehicle_view(request):
+    if request.method == 'POST':
+        form = VehicleForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard:vehicle_list')
+    else:
+        form = VehicleForm()
+    return render(request, 'dashboard/add_vehicle.html', {'form': form})
+
+@login_required(login_url='dashboard:login')
+@user_passes_test(is_admin, login_url='dashboard:login')
+def edit_vehicle_view(request, vehicle_id):
+    vehicle = Vehicle.objects.get(pk=vehicle_id)
+    if request.method == 'POST':
+        form = VehicleForm(request.POST, instance=vehicle)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard:vehicle_list')
+    else:
+        form = VehicleForm(instance=vehicle)
+    return render(request, 'dashboard/edit_vehicle.html', {'form': form, 'vehicle': vehicle})
+
+@login_required(login_url='dashboard:login')
+@user_passes_test(is_admin, login_url='dashboard:login')
+def service_list_view(request):
+    services = Service.objects.all()
+    return render(request, 'dashboard/service_list.html', {'services': services})
+
+@login_required(login_url='dashboard:login')
+@user_passes_test(is_admin, login_url='dashboard:login')
+def add_service_view(request):
+    if request.method == 'POST':
+        form = ServiceForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard:service_list')
+    else:
+        form = ServiceForm()
+    return render(request, 'dashboard/add_service.html', {'form': form})
+
+@login_required(login_url='dashboard:login')
+@user_passes_test(is_admin, login_url='dashboard:login')
+def edit_service_view(request, service_id):
+    service = Service.objects.get(pk=service_id)
+    if request.method == 'POST':
+        form = ServiceForm(request.POST, instance=service)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard:service_list')
+    else:
+        form = ServiceForm(instance=service)
+    return render(request, 'dashboard/edit_service.html', {'form': form, 'service': service})
+
+@login_required(login_url='dashboard:login')
+@user_passes_test(is_admin, login_url='dashboard:login')
+def employee_list_view(request):
+    employees = Employee.objects.all()
+    return render(request, 'dashboard/employee_list.html', {'employees': employees})
+
+@login_required(login_url='dashboard:login')
+@user_passes_test(is_admin, login_url='dashboard:login')
+def add_employee_view(request):
+    if request.method == 'POST':
+        form = EmployeeForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard:employee_list')
+    else:
+        form = EmployeeForm()
+    return render(request, 'dashboard/add_employee.html', {'form': form})
+
+@login_required(login_url='dashboard:login')
+@user_passes_test(is_admin, login_url='dashboard:login')
+def edit_employee_view(request, employee_id):
+    employee = Employee.objects.get(pk=employee_id)
+    if request.method == 'POST':
+        form = EmployeeForm(request.POST, instance=employee)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard:employee_list')
+    else:
+        form = EmployeeForm(instance=employee)
+    return render(request, 'dashboard/edit_employee.html', {'form': form, 'employee': employee})
+
+@login_required(login_url='dashboard:login')
+@user_passes_test(is_admin, login_url='dashboard:login')
+def delete_employee_view(request, employee_id):
+    employee = get_object_or_404(Employee, pk=employee_id)
+    if request.method == 'POST':
+        employee.delete()
+        return redirect('dashboard:employee_list')
+    return render(request, 'dashboard/delete_employee.html', {'employee': employee})
+
+@login_required(login_url='dashboard:login')
+@user_passes_test(is_admin, login_url='dashboard:login')
+def delete_service_view(request, service_id):
+    service = get_object_or_404(Service, pk=service_id)
+    if request.method == 'POST':
+        service.delete()
+        return redirect('dashboard:service_list')
+    return render(request, 'dashboard/delete_service.html', {'service': service})
+
+@login_required(login_url='dashboard:login')
+@user_passes_test(is_admin, login_url='dashboard:login')
+def delete_vehicle_view(request, vehicle_id):
+    vehicle = get_object_or_404(Vehicle, pk=vehicle_id)
+    if request.method == 'POST':
+        vehicle.delete()
+        return redirect('dashboard:vehicle_list')
+    return render(request, 'dashboard/delete_vehicle.html', {'vehicle': vehicle})

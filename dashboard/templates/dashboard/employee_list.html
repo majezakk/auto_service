@@ -1,0 +1,42 @@
+<!-- dashboard/templates/dashboard/employee_list.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сотрудники - Панель управления автосервисом</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Список сотрудников</h1>
+        <a href="{% url 'dashboard:add_employee' %}">Добавить сотрудника</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Имя</th>
+                    <th>Фамилия</th>
+                    <th>Должность</th>
+                    <th>Зарплата</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for employee in employees %}
+                    <tr>
+                        <td>{{ employee.first_name }}</td>
+                        <td>{{ employee.last_name }}</td>
+                        <td>{{ employee.position }}</td>
+                        <td>{{ employee.salary }}</td>
+                        <td>
+                            <a href="{% url 'dashboard:edit_employee' employee.id %}">Редактировать</a> |
+                            <a href="{% url 'dashboard:delete_employee' employee.id %}">Удалить</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

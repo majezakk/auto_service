@@ -1,0 +1,22 @@
+<!-- dashboard/templates/dashboard/delete_employee.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Удалить сотрудника - Панель управления автосервисом</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Удалить сотрудника</h1>
+        <p>Вы действительно хотите удалить сотрудника: {{ employee.first_name }} {{ employee.last_name }}?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit">Удалить</button>
+            <a href="{% url 'dashboard:employee_list' %}">Отмена</a>
+        </form>
+    </div>
+</body>
+</html>

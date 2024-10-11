@@ -1,0 +1,22 @@
+<!-- dashboard/templates/dashboard/add_vehicle.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавить транспортное средство - Панель управления автосервисом</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Добавить транспортное средство</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Добавить</button>
+        </form>
+        <a href="{% url 'dashboard:vehicle_list' %}">Назад к списку транспортных средств</a>
+    </div>
+</body>
+</html>

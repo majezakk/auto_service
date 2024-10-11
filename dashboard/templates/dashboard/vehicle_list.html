@@ -1,0 +1,44 @@
+<!-- dashboard/templates/dashboard/vehicle_list.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Транспортные средства - Панель управления автосервисом</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Список транспортных средств</h1>
+        <a href="{% url 'dashboard:add_vehicle' %}">Добавить транспортное средство</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Марка</th>
+                    <th>Модель</th>
+                    <th>Год выпуска</th>
+                    <th>Номерной знак</th>
+                    <th>Владелец</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for vehicle in vehicles %}
+                    <tr>
+                        <td>{{ vehicle.make }}</td>
+                        <td>{{ vehicle.model }}</td>
+                        <td>{{ vehicle.year }}</td>
+                        <td>{{ vehicle.license_plate }}</td>
+                        <td>{{ vehicle.customer.first_name }} {{ vehicle.customer.last_name }}</td>
+                        <td>
+                            <a href="{% url 'dashboard:edit_vehicle' vehicle.id %}">Редактировать</a> |
+                            <a href="{% url 'dashboard:delete_vehicle' vehicle.id %}">Удалить</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

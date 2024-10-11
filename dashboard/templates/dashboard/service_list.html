@@ -1,0 +1,40 @@
+<!-- dashboard/templates/dashboard/service_list.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Услуги - Панель управления автосервисом</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Список услуг</h1>
+        <a href="{% url 'dashboard:add_service' %}">Добавить услугу</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Название услуги</th>
+                    <th>Описание</th>
+                    <th>Цена за час</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for service in services %}
+                    <tr>
+                        <td>{{ service.service_name }}</td>
+                        <td>{{ service.description }}</td>
+                        <td>{{ service.price_per_hour }}</td>
+                        <td>
+                            <a href="{% url 'dashboard:edit_service' service.id %}">Редактировать</a> |
+                            <a href="{% url 'dashboard:delete_service' service.id %}">Удалить</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
