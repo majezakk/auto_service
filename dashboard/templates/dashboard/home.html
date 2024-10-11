@@ -1,0 +1,26 @@
+<!-- dashboard/templates/dashboard/home.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Панель администратора - Автосервис</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"> 
+</head>
+<body>
+    <div class="container">
+        <h1>Добро пожаловать в панель управления автосервисом</h1>
+        <p>Используйте меню для управления клиентами, транспортными средствами, услугами и сотрудниками.</p>
+
+        <div class="navigation">
+            <ul>
+                <li><a href="/customers/">Клиенты</a></li>
+                <li><a href="#">Транспортные средства</a></li>
+                <li><a href="#">Услуги</a></li>
+                <li><a href="#">Сотрудники</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
